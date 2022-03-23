@@ -1,0 +1,251 @@
+////#include<GL/glut.h>
+////#include <stdlib.h>
+////
+////void init(void) {
+////	glClearColor(0.0, 0.0, 0.0, 0.0);
+////	glShadeModel(GL_SMOOTH);
+////}
+////
+////void triangle(void) {
+////	glBegin(GL_TRIANGLES);
+////	glColor3f(1.0, 0.0, 0.0);
+////	glVertex2f(-0.5, -0.5);
+////	glColor3f(0.0, 1.0, 0.0);
+////	glVertex2f(0.5, -0.5);
+////	glColor3f(0.0, 0.0, 1.0);
+////	glVertex2f(-0.5, 0.5);
+////	glEnd();
+////}
+////
+////void display(void) {
+////	glClear(GL_COLOR_BUFFER_BIT);
+////	triangle();
+////	glFlush();
+////}
+////
+////void reshape(int new_w, int new_h) {
+////	glViewport(0, 0, new_w, new_h);
+////	float WidthFactor = (float)new_w / 300.0;
+////	float HeightFactor = (float)new_h / 300.0;
+////
+////	glMatrixMode(GL_PROJECTION);
+////	glLoadIdentity();
+////
+////	gluOrtho2D(-1.0 * WidthFactor, 1.0 * WidthFactor, -1.0*HeightFactor, 1.0*HeightFactor);
+////}
+////
+////int main(int argc, char** argv) {
+////	glutInit(&argc, argv);
+////	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+////	glutInitWindowSize(300, 300);
+////	glutInitWindowPosition(100, 100);
+////	glutCreateWindow(argv[0]);
+////	init();
+////	glutDisplayFunc(display);
+////	glutReshapeFunc(reshape);
+////	glutMainLoop();
+////	return 0;
+////}
+//
+////#include<GL/glut.h>
+////#include <stdio.h>
+////#include <stdlib.h>
+////
+////void init(void) {
+////	glClearColor(0.0, 0.0, 0.0, 0.0);
+////}
+////
+////void display(void) {
+////	glClear(GL_COLOR_BUFFER_BIT);
+////	glClearColor(0.0, 0.0, 0.0, 0.0);
+////	glFlush();
+////}
+////
+////void mouseProcess(int button, int state, int x, int y) {
+////	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) 
+////		printf("Left mouse button is pressed.. \a\n");
+////	else if (button == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
+////		printf("Middle mouse button is pressed.. \a\n");
+////	else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+////		printf("Right mouse button is pressed.. \a\n");
+////	else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
+////		printf("Left mouse button is released.. \a\n");
+////	else if (button == GLUT_MIDDLE_BUTTON && state == GLUT_UP)
+////		printf("Middle mouse button is released.. \a\n");
+////	else if (button == GLUT_RIGHT_BUTTON && state == GLUT_UP)
+////		printf("Right mouse button is released.. \a\n");
+////
+////}
+////
+////void mousePassiveMotaion(int x, int y) {
+////	printf("Current mouse position: %d, %d\n", x, y);
+////}
+////
+////void mouseActiveMotion(int x, int y) {
+////	printf("Pressed mouse position: %d, %d\n", x, y);
+////}
+////
+////void mouseEntry(int state) {
+////	if (state == GLUT_LEFT)
+////		printf("Mouse is outside of window..\a\n");
+////	else if (state == GLUT_ENTERED)
+////		printf("Mouse is inside of window..\a\n");
+////}
+////
+////void keyboard(unsigned char key, int x, int y) {
+////	switch (key)
+////	{
+////	case 'a':
+////		printf("a is pressed.. %d, %d\a\n", x, y);
+////		break;
+////	case 'b':
+////		printf("b is pressed.. %d, %d\a\n", x, y);
+////		break;
+////
+////	case 27:
+////		exit(0);
+////		break;
+////	}
+////}
+////
+////int main(int argc, char** argv) {
+////	glutInit(&argc, argv);
+////	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+////	glutInitWindowSize(500, 500);
+////	glutInitWindowPosition(100, 100);
+////	glutCreateWindow("Mouse and keyboard");
+////	init();
+////	glutDisplayFunc(display);
+////	glutKeyboardFunc(keyboard);
+////	glutMouseFunc(mouseProcess);
+////	glutMainLoop();
+////	return 0;
+////}
+//
+////#include <GL/glut.h>
+////#include <stdlib.h>
+////#include <stdio.h>
+////
+////#define size 50.0
+////
+////float w_height = 800;
+////float w_width = 800;
+////float square_x = 0, square_y = 400;
+////float square_dx = 0.1;
+////
+////void idleCallBack() {
+////	square_x += square_dx;
+////	if (square_x + size > w_width || square_x < 0) square_dx *= -1.0;
+////	glutPostRedisplay();
+////}
+////
+////void displayCallBack(void) {
+////	glClearColor(0.0, 0.0, 0.0, 1.0);
+////	glClear(GL_COLOR_BUFFER_BIT);
+////
+////	glMatrixMode(GL_PROJECTION);
+////	glLoadIdentity();
+////	glOrtho(0.0, w_width, 0.0, w_height, -1.0, 1.0);
+////
+////	glMatrixMode(GL_MODELVIEW);
+////	glLoadIdentity();
+////	glTranslatef(square_x, square_y, 0.0);
+////
+////	glColor3ub(255, 255, 0);
+////	glBegin(GL_POLYGON);
+////	glVertex2f(0, 0);
+////	glVertex2f(size, 0);
+////	glVertex2f(size, size);
+////	glVertex2f(0, size);
+////	glEnd();
+////
+////	glutSwapBuffers();
+////}
+////
+////void main(int argc, char** argv) {
+////	glutInit(&argc, argv);
+////
+////	glutInitWindowPosition(10, 10);
+////	glutInitWindowSize(w_width, w_height);
+////	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+////	glutCreateWindow("Idle Callback");
+////
+////	glutDisplayFunc(displayCallBack);
+////	glutIdleFunc(idleCallBack);
+////
+////	glutMainLoop();
+////}
+//
+//#include <GL/glut.h>
+//#include <GL/GLU.h>
+//#include <GL/GL.h>
+//#include <time.h>
+//
+//unsigned char PALETTE[16][3] = {
+//	{255,255,255},
+//	{0,255,255},
+//	{255,0,255},
+//	{0,0,255},
+//	{192,192,192},
+//	{128,128,128},
+//	{0,128,128},
+//	{128,0,128},
+//	{0,0,128},
+//	{255,255,0},
+//	{0,255,0},
+//	{128,128,0},
+//	{0,128,0},
+//	{255,0,0},
+//	{128,0,0},
+//	{0,0,0},
+//};
+//
+//GLfloat Delta = 0.0;
+//GLint Index = 0;
+//GLfloat Red = 0.0;
+//GLfloat Green = 0.0;
+//GLfloat Blue = 0.0;
+//
+//void MyDisplay() {
+//	Red = PALETTE[Index][0] / 255.0f;
+//	Green = PALETTE[Index][1] / 255.0f;
+//	Blue = PALETTE[Index][2] / 255.0f;
+//	glColor3f(Red, Green, Blue);
+//
+//	glBegin(GL_LINES);
+//	glVertex3f(-1.0 + Delta, 1.0, 0.0);
+//	glVertex3f(1.0 - Delta, -1.0, 0.0);
+//	glVertex3f(-1.0, -1.0 + Delta, 0.0);
+//	glVertex3f(1.0, 1.0 - Delta, 0.0);
+//	glEnd();
+//	glutSwapBuffers();
+//}
+//
+//void MyTimer(int value) {
+//	if (Delta < 2.0f)Delta = Delta + 0.01;
+//	else {
+//		Delta = 0.0;
+//		if (++Index >= 15) {
+//			Index = 0;
+//			glClear(GL_COLOR_BUFFER_BIT);
+//		}
+//	}
+//	glutPostRedisplay();
+//	glutTimerFunc(10, MyTimer, 1);
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(0, 0);
+//	glutCreateWindow("Timer Callback 예제");
+//	glClearColor(0.0, 0.0, 0.0, 1.0);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+//	glutTimerFunc(10, MyTimer, 1);
+//	glutDisplayFunc(MyDisplay);
+//	glutMainLoop();
+//	return 0;
+//}
