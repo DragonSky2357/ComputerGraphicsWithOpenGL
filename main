@@ -596,3 +596,176 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+
+//#include<GL/glut.h>
+//#include <stdlib.h>
+//
+//void init(void) {
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	glShadeModel(GL_FLAT);
+//}
+//
+//void display(void) {
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glColor3f(1.0, 1.0, 1.0);
+//	glLoadIdentity();
+//
+//	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+//	glScalef(1.0, 2.0, 1.0);
+//	glutWireCube(1.0);
+//	glFlush();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, w, h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glFrustum(-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+//	glMatrixMode(GL_MODELVIEW);
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Transformed Cube");
+//	init();
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(reshape);
+//	glutMainLoop();
+//	return 0;
+//}
+
+//#include <GL/glut.h>
+//
+//void draw_square() {
+//	glBegin(GL_POLYGON);
+//	glVertex2f(-0.5, -0.5);
+//	glVertex2f(-0.5, 0.5);
+//	glVertex2f(0.5, 0.5);
+//	glVertex2f(0.5, -0.5);
+//	glEnd();
+//}
+//
+//void display() {
+//	glClear(GL_COLOR_BUFFER_BIT);
+//
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//
+//	glViewport(0, 0, 400, 400);
+//	glColor3f(1.0, 0.0, 0.0);
+//	glBegin(GL_LINES);
+//	glVertex2f(-1.0, 0);
+//	glVertex2f(1.0, 0);
+//	glVertex2f(0.0, -1.0);
+//	glVertex2f(0.0, 1.0);
+//	glEnd();
+//
+//	glViewport(0, 0, 200, 200);
+//	glColor3f(0.0, 1.0, 0.0);
+//	draw_square();
+//
+//	glViewport(0, 200, 200, 200);
+//	glColor3f(1.0, 0.0, 1.0);
+//	draw_square();
+//
+//	glViewport(200, 200, 200, 200);
+//	glColor3f(0.0, 0.0, 1.0);
+//	draw_square();
+//
+//	glFlush();
+//}
+//
+//void init() {
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	glColor3f(1.0, 1.0, 1.0);
+//
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutInitWindowPosition(100, 100);
+//	glutInitWindowSize(400, 400);
+//	glutCreateWindow("glViewport Example");
+//	init();
+//	glutDisplayFunc(display);
+//	glutMainLoop();
+//}
+//
+
+#include <GL/glut.h>
+#include <stdlib.h>
+
+float v1[3] = { -10.0,-35.0,0.0 };
+float v2[3] = { 10.0,-35.0,0.0 };
+float v3[3] = { 10.0,35.0,0.0 };
+float v4[3] = { -10.0,35.0,0.0 };
+
+void init(void) {
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-100.0, 400.0, -100.0, 400.0);
+}
+
+void draw_rectangle() {
+	glBegin(GL_POLYGON);
+	glVertex3fv(v1);
+	glVertex3fv(v2);
+	glVertex3fv(v3);
+	glVertex3fv(v4);
+	glEnd();
+}
+
+void draw_line() {
+	glColor3f(0.0, 1.0, 0.0);
+	glBegin(GL_LINES);
+	glVertex3f(-100.0, 0.0, 0.0);
+	glVertex3f(400.0, 0.0, 0.0);
+	glVertex3f(0.0, -100.0, 0.0);
+	glVertex3f(0.0, 400.0, 0.0);
+	glEnd();
+}
+
+void display() {
+	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+
+	glLoadIdentity();
+	draw_line();
+
+	glColor3f(0.0, 0.0, 1.0);
+	draw_rectangle();
+
+	glLoadIdentity();
+	glTranslatef(100.0, 0.0, 0.0);
+	glRotatef(45.0, 0.0, 0.0, 1.0);
+	glColor3f(1.0, 0.0, 0.0);
+	draw_rectangle();
+
+	glLoadIdentity();
+	glRotatef(45.0, 0.0, 0.0, 1.0);
+	glTranslatef(100.0, 0.0, 0.0);
+	glColor3f(1.0, 1.0, 0.0);
+	draw_rectangle();
+
+	glFlush();
+}
+
+int main(int argc, char**argv) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowPosition(500, 500);
+	glutInitWindowSize(300, 300);
+	glutCreateWindow("glViewport Example");
+	init();
+
+	glutDisplayFunc(display);
+	glutMainLoop();
+}
