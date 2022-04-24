@@ -16,7 +16,7 @@
 
 void init(void);
 void display(void);
-void middleButtonInit(void); 
+void middleButtonInit(void);
 void mouse(int button, int state, int x, int y);
 void reshape(int new_w, int new_h);
 void PassiveMotion(int x, int y);
@@ -38,7 +38,7 @@ int draggeX1, draggeX2, draggeY1, draggeY2;
 int passiveMouseX, passiveMouseY;
 GLfloat spin = 0.0;
 
-void main(int argc, char** argv){
+void main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -61,20 +61,20 @@ void middleButtonInit(void) {
 	passiveButton = FALSE;
 	draggeX1 = draggeX2 = draggeY1 = draggeY2 = 0;
 	passiveMouseX = passiveMouseY = 0;
-	glutPassiveMotionFunc(NULL);
+	glutPassiveMotionFunc(MakeRubberBandLine);
 	glutIdleFunc(NULL);
 }
 
-void mouse(int button, int state, int x, int y){
+void mouse(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
-		if (checkRightButton == FALSE && locationCount < MAX_POINT){
+		if (checkRightButton == FALSE && locationCount < MAX_POINT) {
 			location[locationCount][0] = x;
 			location[locationCount++][1] = y;
 		}
 	}
 
 	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
-		if (checkRightButton == FALSE && locationCount < MAX_POINT){
+		if (checkRightButton == FALSE && locationCount < MAX_POINT) {
 			location[locationCount][0] = x;
 			location[locationCount++][1] = y;
 		}
@@ -107,7 +107,7 @@ void mouse(int button, int state, int x, int y){
 	glutPostRedisplay();
 }
 
-void init(void){
+void init(void) {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -115,14 +115,14 @@ void init(void){
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
-void display(void){
+void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	if (passiveButton == FALSE) {
-		for (int i = 0; i < locationCount; i++){
+		for (int i = 0; i < locationCount; i++) {
 			int x = location[i][0], y = location[i][1];
 
 			glPushMatrix();
@@ -134,12 +134,12 @@ void display(void){
 		}
 	}
 
-	if (checkRightButton==TRUE && passiveButton == FALSE)
+	if (checkRightButton == TRUE && passiveButton == FALSE)
 		MakePolygon();
 
-	if (passiveButton==TRUE) {
+	if (passiveButton == TRUE) {
 		glPushMatrix();
-		glTranslatef(passiveMouseX , passiveMouseY , 0);
+		glTranslatef(passiveMouseX, passiveMouseY, 0);
 		glRotatef(spin, 0, 0, 1.0);
 		glTranslatef(-passiveMouseX, -passiveMouseY, 0);
 		MakePolygon();
@@ -206,7 +206,7 @@ void MakePolygon() {
 	glBegin(GL_POLYGON);
 	glColor3f(0, 1, 0);
 
-	for (int i = 0; i < locationCount; i++){
+	for (int i = 0; i < locationCount; i++) {
 		int x = location[i][0], y = location[i][1];
 		glVertex3f(x, y, 0.0f);
 	}
@@ -245,5 +245,3 @@ void SpinDisplay(void) {
 
 	glutPostRedisplay();
 }
-
-
