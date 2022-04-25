@@ -958,76 +958,208 @@
 //	return 0;
 //}
 
+//#include <GL/glut.h>
+//
+//void draw_rectangle() {
+//	glBegin(GL_POLYGON);
+//	glVertex2f(0.2, 0.4);
+//	glVertex2f(0.8, 0.4);
+//	glVertex2f(0.8, 0.6);
+//	glVertex2f(0.2, 0.6);
+//	glEnd();
+//}
+//
+//void draw_point() {
+//	glPointSize(5.0);
+//	glBegin(GL_POINTS);
+//	glVertex2f(0.5, 0.5);
+//	glEnd();
+//}
+//
+//void draw_lines() {
+//	glBegin(GL_LINES);
+//	glVertex2f(-1.0, 0.0);
+//	glVertex2f(1.0, 0.0);
+//	glVertex2f(0.0, -1.0);
+//	glVertex2f(0.0, 1.0);
+//	glEnd();
+//}
+//
+//void display() {
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glMatrixMode(GL_MODELVIEW);
+//
+//	glLoadIdentity();
+//
+//	glColor3f(1.0, 0.0, 0.0);
+//	draw_rectangle();
+//
+//	glColor3f(0.0, 0.0, 1.0);
+//	glTranslatef(0.5, 0.5, 0.0);
+//	glRotatef(90.0, 0.0, 0.0, 1.0);
+//	glTranslatef(-0.5, -0.5, 0.0);
+//	draw_rectangle();
+//
+//	glColor3f(0.0, 0.0, 0.0);
+//	draw_point();
+//
+//	glLoadIdentity();
+//	glColor3f(0.0, 0.0, 0.0);
+//	draw_lines();
+//
+//	glFlush();
+//}
+//
+//void init() {
+//	glClearColor(1.0, 1.0, 1.0, 0.0);
+//	glColor3f(1.0, 1.0, 1.0);
+//
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+//	glViewport(0, 0, 800, 800);
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutInitWindowSize(800, 800);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("임의의 점에 대한 회전");
+//	init();
+//	glutDisplayFunc(display);
+//	glutMainLoop();
+//	return 0;
+//}
+
+//#include<GL/glut.h>
+//
+//void display(void) {
+//	GLdouble eqn[4] = { 0.0,1.0,0.0,0.0 };
+//	GLdouble eqn2[4] = { 1.0,0.0,0.0,0.0 };
+//
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glColor3f(1.0, 1.0, 1.0);
+//	glPushMatrix();
+//	glTranslatef(0.0, 0.0, -3.0);
+//
+//	// clip lower half -- y < 0
+//	glClipPlane(GL_CLIP_PLANE0, eqn);
+//	glEnable(GL_CLIP_PLANE0);
+//
+//	// clip left half -- x < 0
+//	glClipPlane(GL_CLIP_PLANE1, eqn2);
+//	glEnable(GL_CLIP_PLANE1);
+//
+//	glRotatef(90.0, 1.0, 0.0, 0.0);
+//	glutWireSphere(1.0, 20, 16);
+//	glPopMatrix();
+//	glFlush();
+//}
+//
+//void myinit(void) {
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	glShadeModel(GL_FLAT);
+//}
+//
+//void myReshape(int w, int h) {
+//	glViewport(0, 0, w, h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 1.0, 20.0);
+//	glMatrixMode(GL_MODELVIEW);
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow(argv[0]);
+//	myinit();
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(myReshape);
+//	glutMainLoop();
+//	return 0;
+//}
+
 #include <GL/glut.h>
 
-void draw_rectangle() {
-	glBegin(GL_POLYGON);
-	glVertex2f(0.2, 0.4);
-	glVertex2f(0.8, 0.4);
-	glVertex2f(0.8, 0.6);
-	glVertex2f(0.2, 0.6);
-	glEnd();
+void init(void);
+void display(void);
+void keyboard(unsigned char key, int x, int y);
+void reshape(int w, int h);
+
+static int year = 0, day = 0;
+
+void init(void){
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glShadeModel(GL_FLAT);
 }
 
-void draw_point() {
-	glPointSize(5.0);
-	glBegin(GL_POINTS);
-	glVertex2f(0.5, 0.5);
-	glEnd();
-}
-
-void draw_lines() {
-	glBegin(GL_LINES);
-	glVertex2f(-1.0, 0.0);
-	glVertex2f(1.0, 0.0);
-	glVertex2f(0.0, -1.0);
-	glVertex2f(0.0, 1.0);
-	glEnd();
-}
-
-void display() {
+void display(void){
 	glClear(GL_COLOR_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
+	glColor3f(1.0, 1.0, 1.0);
+	glPushMatrix();
+	glutWireSphere(1.0, 20, 16);
+	glRotatef((GLfloat)year, 0.0, 1.0, 0.0);
+	glTranslatef(2.0, 0.0, 0.0);
+	glRotatef((GLfloat)day, 0.0, 1.0, 0.0);
+	glutWireSphere(0.2, 10, 8);
+	glPopMatrix();
+	glutSwapBuffers();
 
-	glLoadIdentity();
-
-	glColor3f(1.0, 0.0, 0.0);
-	draw_rectangle();
-
-	glColor3f(0.0, 0.0, 1.0);
-	glTranslatef(0.5, 0.5, 0.0);
-	glRotatef(90.0, 0.0, 0.0, 1.0);
-	glTranslatef(-0.5, -0.5, 0.0);
-	draw_rectangle();
-
-	glColor3f(0.0, 0.0, 0.0);
-	draw_point();
-
-	glLoadIdentity();
-	glColor3f(0.0, 0.0, 0.0);
-	draw_lines();
-
-	glFlush();
+	glutPostRedisplay();
 }
 
-void init() {
-	glClearColor(1.0, 1.0, 1.0, 0.0);
-	glColor3f(1.0, 1.0, 1.0);
+void keyboard(unsigned char key, int x, int y){
+	switch (key)
+	{
+	case 'd':
+		day = (day + 10) % 360;
+		break;
+	case 'D':
+		day = (day - 10) % 360;
+		break;
+	case 'y':
+		year = (year + 5) % 360;
+		break;
+	case 'Y':
+		year = (year -5) % 360;
+		break;
+		default:
+			break;
+	}
+	glutPostRedisplay();
+}
 
+void reshape(int w, int h) {
+	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
-	glViewport(0, 0, 800, 800);
+	gluPerspective(60.0,(GLfloat)w/(GLfloat)h,1.0,20.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+	glutPostRedisplay();
 }
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(800, 800);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("임의의 점에 대한 회전");
+	glutCreateWindow("Planet");
+
 	init();
+
 	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
+	glutKeyboardFunc(keyboard);
+
 	glutMainLoop();
+
 	return 0;
 }
