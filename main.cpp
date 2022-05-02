@@ -1083,83 +1083,271 @@
 //	return 0;
 //}
 
-#include <GL/glut.h>
+//#include <GL/glut.h>
+//
+//void init(void);
+//void display(void);
+//void keyboard(unsigned char key, int x, int y);
+//void reshape(int w, int h);
+//
+//static int year = 0, day = 0;
+//
+//void init(void){
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	glShadeModel(GL_FLAT);
+//}
+//
+//void display(void){
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glColor3f(1.0, 1.0, 1.0);
+//	glPushMatrix();
+//	glutWireSphere(1.0, 20, 16);
+//	glRotatef((GLfloat)year, 0.0, 1.0, 0.0);
+//	glTranslatef(2.0, 0.0, 0.0);
+//	glRotatef((GLfloat)day, 0.0, 1.0, 0.0);
+//	glutWireSphere(0.2, 10, 8);
+//	glPopMatrix();
+//	glutSwapBuffers();
+//
+//	glutPostRedisplay();
+//}
+//
+//void keyboard(unsigned char key, int x, int y){
+//	switch (key)
+//	{
+//	case 'd':
+//		day = (day + 10) % 360;
+//		break;
+//	case 'D':
+//		day = (day - 10) % 360;
+//		break;
+//	case 'y':
+//		year = (year + 5) % 360;
+//		break;
+//	case 'Y':
+//		year = (year -5) % 360;
+//		break;
+//		default:
+//			break;
+//	}
+//	glutPostRedisplay();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluPerspective(60.0,(GLfloat)w/(GLfloat)h,1.0,20.0);
+//
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+//
+//	glutPostRedisplay();
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Planet");
+//
+//	init();
+//
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(reshape);
+//	glutKeyboardFunc(keyboard);
+//
+//	glutMainLoop();
+//
+//	return 0;
+//}
 
-void init(void);
-void display(void);
-void keyboard(unsigned char key, int x, int y);
-void reshape(int w, int h);
+// 06-1 Pop up
+//#include<GL/glut.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//void display(void) {
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	glMatrixMode(GL_MODELVIEW);
+//	glColor3f(0.0f, 0.0f, 0.0f);
+//	glFlush();
+//}
+//
+//void main_menu_select(int value) {
+//	switch (value)
+//	{
+//	case 1:
+//		glutSetWindowTitle("First mode..");
+//		printf("첫번째 메뉴를 선택하셨습니다.\n");
+//		break;
+//	case 2:
+//		glutSetWindowTitle("Second mode..");
+//		printf("두번째 메뉴를 선택하셨습니다.\n");
+//		break;
+//	case 3:
+//		glutSetWindowTitle("Third mode..");
+//		printf("세번째 메뉴를 선택하셨습니다.\n");
+//		break;
+//
+//	case 666:
+//		printf("프로그램 종료...\n");
+//		exit(0);
+//		break;
+//	}
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInitWindowSize(400, 400);
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutCreateWindow("Menu example by");
+//	glutDisplayFunc(display);
+//
+//	glutCreateMenu(main_menu_select);
+//	glutAddMenuEntry("First", 1);
+//	glutAddMenuEntry("Second", 2);
+//	glutAddMenuEntry("Third", 3);
+//	glutAddMenuEntry("Quit", 666);
+//
+//	glutAttachMenu(GLUT_RIGHT_BUTTON);
+//
+//	glutMainLoop();
+//	return 0;
+//}
 
-static int year = 0, day = 0;
+// 06-2 Popup Sub Menu
+//#include<stdlib.h>
+//#include<GL/glut.h>
+//#include<GL/GL.h>
+//#include<GL/GLU.h>
+//
+//GLboolean IsSphere = true;
+//GLboolean IsSmall = true;
+//
+//void MyDisplay() {
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glColor3f(0.5, 0.5, 0.5);
+//	if ((IsSphere) && (IsSmall))
+//		glutWireSphere(0.2, 15, 15);
+//	else if ((IsSphere) && (!IsSmall))
+//		glutWireSphere(0.4, 15, 15);
+//	else if ((!IsSphere) && (IsSmall))
+//		glutWireTorus(0.1, 0.3, 40, 20);
+//	else
+//		glutWireTorus(0.2, 0.5, 40, 20);
+//	glFlush();
+//}
+//
+//void MyMainMenu(int entryID) {
+//	if (entryID == 1)
+//		IsSphere = true;
+//	else if (entryID == 2)
+//		IsSphere = false;
+//	else if (entryID == 3)
+//		exit(0);
+//	glutPostRedisplay();
+//}
+//
+//void MySubMenu(int entryID) {
+//	if (entryID == 1)
+//		IsSmall = true;
+//	else if (entryID == 2)
+//		IsSmall = false;
+//	glutPostRedisplay();
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_RGB);
+//	glutInitWindowSize(300, 300);
+//	glutInitWindowPosition(0, 0);
+//	glutCreateWindow("OpenGL Sub menu example");
+//
+//	glClearColor(1.0, 1.0, 1.0, 1.0);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+//
+//	GLint MySubMenuID = glutCreateMenu(MySubMenu);
+//	glutAddMenuEntry("Small Object", 1);
+//	glutAddMenuEntry("Big Object", 2);
+//	GLint MyMainMenuID = glutCreateMenu(MyMainMenu);
+//	glutAddMenuEntry("Draw Sphere", 1);
+//	glutAddMenuEntry("Draw Torus", 2);
+//	glutAddSubMenu("Change Size", MySubMenuID);
+//	glutAddMenuEntry("Exit", 3);
+//	glutAttachMenu(GLUT_RIGHT_BUTTON);
+//	glutDisplayFunc(MyDisplay);
+//	glutMainLoop();
+//	return 0;
+//}
 
-void init(void){
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glShadeModel(GL_FLAT);
-}
-
-void display(void){
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
-	glPushMatrix();
-	glutWireSphere(1.0, 20, 16);
-	glRotatef((GLfloat)year, 0.0, 1.0, 0.0);
-	glTranslatef(2.0, 0.0, 0.0);
-	glRotatef((GLfloat)day, 0.0, 1.0, 0.0);
-	glutWireSphere(0.2, 10, 8);
-	glPopMatrix();
-	glutSwapBuffers();
-
-	glutPostRedisplay();
-}
-
-void keyboard(unsigned char key, int x, int y){
-	switch (key)
-	{
-	case 'd':
-		day = (day + 10) % 360;
-		break;
-	case 'D':
-		day = (day - 10) % 360;
-		break;
-	case 'y':
-		year = (year + 5) % 360;
-		break;
-	case 'Y':
-		year = (year -5) % 360;
-		break;
-		default:
-			break;
-	}
-	glutPostRedisplay();
-}
-
-void reshape(int w, int h) {
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(60.0,(GLfloat)w/(GLfloat)h,1.0,20.0);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-
-	glutPostRedisplay();
-}
-
-int main(int argc, char** argv) {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
-	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Planet");
-
-	init();
-
-	glutDisplayFunc(display);
-	glutReshapeFunc(reshape);
-	glutKeyboardFunc(keyboard);
-
-	glutMainLoop();
-
-	return 0;
-}
+// 06-3 Color Cube
+//#include <GL/glut.h>
+//#include <GL/GL.h>
+//#include <GL/GLU.h>
+//
+//GLfloat MyVertices[8][3] = {
+//	{-0.25,-0.25,0.25},
+//	{-0.25,0.25,0.25},
+//	{0.25,0.25,0.25},
+//	{0.25,-0.25,0.25},
+//	{-0.25,-0.25,-0.25},
+//	{-0.25,0.25,-0.25},
+//	{0.25,0.25,-0.25},
+//	{0.25,-0.25,-0.25}
+//};
+//
+//GLfloat MyColors[8][3] = {
+//	{0.2,0.2,0.2},
+//	{1.0,0.0,0.0},
+//	{1.0,1.0,0.0},
+//	{0.0,1.0,0.0},
+//	{0.0,0.0,0.1},
+//	{1.0,0.0,1.0},
+//	{1.0,1.0,1.0},
+//	{0.0,1.0,1.0},
+//};
+//
+//GLubyte MyVertexList[24] = {
+//	0,3,2,1,
+//	2,3,7,6,
+//	0,4,7,3,
+//	1,2,6,5,
+//	4,5,6,7,
+//	0,1,5,4
+//};
+//
+//void MyDisplay() {
+//	glClear(GL_COLOR_BUFFER_BIT);
+//	glFrontFace(GL_CCW);
+//	glEnable(GL_CULL_FACE);
+//	glEnableClientState(GL_COLOR_ARRAY);
+//	glEnableClientState(GL_VERTEX_ARRAY);;
+//	glColorPointer(3, GL_FLOAT, 0, MyColors);
+//	glVertexPointer(3, GL_FLOAT, 0, MyVertices);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//	glRotatef(30.0, 1.0, 1.0, 1.0);
+//	for (GLint i = 0; i < 6; i++)
+//		glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_BYTE, &MyVertexList[4 * i]);
+//	glFlush();
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_RGB);
+//	glutInitWindowSize(300, 300);
+//	glutInitWindowPosition(0, 0);
+//	glutCreateWindow("OpenGL Vetex Array Example");
+//	glClearColor(1.0, 1.0, 1.0, 1.0);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+//	glutDisplayFunc(MyDisplay);
+//	glutMainLoop();
+//	return 0;
+//}
