@@ -1351,3 +1351,394 @@
 //	glutMainLoop();
 //	return 0;
 //}
+
+//#include <math.h>
+//#include <GL/glut.h>
+//#include <stdio.h>
+//
+//GLint winWidth = 666, winHeight = 666;
+//GLfloat eyeX = 6.6, eyeY = 6.6, eyeZ = 2.6;
+//GLfloat theta = 276.6, phi = 186.6;
+//GLfloat upX = 6.6, upY = 1.6, upZ = 6.6;
+//GLfloat r = 2.6;
+//
+//void draw_cubde()
+//{
+//	//앞
+//	glBegin(GL_POLYGON);
+//	glColor3f(1.0, 1.0, 1.0); // White
+//	glVertex3f(0.5, 0.5, 0.5);
+//	glColor3f(1.0, 0.0, 1.0);
+//	glVertex3f(-0.5, 0.5, 0.5);
+//	glColor3f(1.0, 0.0, 0.0);
+//	glVertex3f(-0.5, -0.5, 0.5);
+//	glColor3f(1.0, 1.0, 0.0);
+//	glVertex3f(0.5, -0.5, 0.5);
+//
+//	glEnd();
+//
+//
+//	glBegin(GL_POLYGON);//오른쪽
+//	glColor3f(1.0, 1.0, 1.0); // White
+//	glVertex3f(0.5, 0.5, 0.5);
+//	glColor3f(1.0, 1.0, 0.0);
+//	glVertex3f(0.5, -0.5, 0.5);
+//	glColor3f(0.0, 1.0, 0.0);
+//	glVertex3f(0.5, -0.5, -0.5);
+//	glColor3f(0.0, 1.0, 1.0);
+//	glVertex3f(0.5, 0.5, -0.5);
+//	glEnd();
+//
+//	//위쪽
+//	glBegin(GL_POLYGON);
+//	glColor3f(1.0, 0.0, 1.0); // White
+//	glVertex3f(-0.5, 0.5, 0.5);
+//	glColor3f(1.0, 1.0, 1.0);
+//	glVertex3f(0.5, 0.5, 0.5);
+//	glColor3f(0.0, 1.0, 1.0);
+//	glVertex3f(0.5, 0.5, -0.5);
+//	glColor3f(0.0, 0.0, 1.0);
+//	glVertex3f(-0.5, 0.5, -0.5);
+//	glEnd();
+//
+//	//왼쪽
+//	glBegin(GL_POLYGON);
+//	glColor3f(1.0, 0.0, 1.0); // White
+//	glVertex3f(-0.5, 0.5, 0.5);
+//	glColor3f(0.0, 0.0, 1.0);
+//	glVertex3f(-0.5, 0.5, -0.5);
+//	glColor3f(0.0, 0.0, 1.0);
+//	glVertex3f(-0.5, -0.5, -0.5);
+//	glColor3f(1.0, 0.0, 0.0);
+//	glVertex3f(-0.5, -0.5, 0.5);
+//
+//	glEnd();
+//	//아래
+//	glBegin(GL_POLYGON);
+//	glColor3f(1.0, 0.0, 0.0); // White
+//	glVertex3f(-0.5, -0.5, 0.5);
+//	glColor3f(0.0, 0.0, 1.0);
+//	glVertex3f(-0.5, -0.5, -0.5);
+//	glColor3f(0.0, 1.0, 0.0);
+//	glVertex3f(0.5, -0.5, -0.5);
+//	glColor3f(1.0, 1.0, 0.0);
+//	glVertex3f(0.5, -0.5, 0.5);
+//	glEnd();
+//
+//	//뒤쪽
+//	glBegin(GL_POLYGON);
+//	glColor3f(0.0, 0.0, 1.0); // White
+//	glVertex3f(-0.5, 0.5, 0.5);
+//	glColor3f(0.0, 1.0, 1.0);
+//	glVertex3f(0.5, 0.5, -0.5);
+//	glColor3f(0.0, 1.0, 0.0);
+//	glVertex3f(0.5, -0.5, -0.5);
+//	glColor3f(0.0, 0.0, 1.0);
+//	glVertex3f(-0.5, -0.5, -0.5);
+//
+//	glEnd();
+//}
+//void init()
+//{
+//	glClearColor(0, 0, 0, 0);
+//	glEnable(GL_DEPTH_TEST);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glFrustum(-1, 1, -1, 1, .6, 300);
+//}
+//void displayFcn()
+//{
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//	gluLookAt(eyeX, eyeY, eyeZ, 0, 0, 0, upX, upY, upZ);
+//
+//	glPolygonMode(GL_FRONT, GL_FILL);
+//	draw_cubde();
+//
+//	glutSwapBuffers();
+//}
+//
+//void reshapeFcn(GLint newWidth, GLint newHeight)
+//{
+//	glViewport(0, 0, newWidth, newHeight);
+//	winWidth = newWidth;
+//	winHeight = newHeight;
+//}
+//
+//void eyePosition(void)
+//{
+//	GLfloat dt = 1.0;
+//
+//	GLfloat eyeXtemp = r * sin(theta*0.0174532 - dt)*sin(phi*0.0174532);
+//	GLfloat eyeYtemp = r * cos(theta*0.0174532 - dt);
+//	GLfloat eyeZtemp = r * sin(theta*0.0174532 - dt)*cos(phi*0.0174532);
+//
+//	eyeX = r * sin(theta*0.0174532 - dt)*sin(phi*0.0174532);
+//	eyeY = r * cos(theta*0.0174532 - dt);
+//	eyeX = r * sin(theta*0.0174532 - dt)*cos(phi*0.0174532);
+//
+//	upX = eyeXtemp - eyeX;
+//	upY = eyeYtemp - eyeY;
+//	upZ = eyeZtemp - eyeZ;
+//	glutPostRedisplay();
+//}
+//void onMouseMove(int x, int y)
+//{
+//	theta = (360.0 / (double)winHeight)*(double)y*3.0;
+//	phi = (360.0 / (double)winWidth)*(double)x*3.0;
+//
+//	if (theta > 360)theta = fmod((double)theta, 360.0);
+//	if (phi > 360)phi = fmod((double)phi, 360.0);
+//	eyePosition();
+//}
+//void SpecialKeys(int key, int x, int y)
+//{
+//	if (key == GLUT_KEY_UP) r -= 0.1;
+//	if (key == GLUT_KEY_DOWN) r += 0.1;
+//
+//	eyePosition();
+//}
+//int main(int argc, char **argv){
+//
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(winWidth, winHeight);
+//	glutInitWindowPosition(50, 50);
+//	glutCreateWindow("Camera & RGB Color Cube");
+//
+//	init();
+//	glutDisplayFunc(displayFcn);
+//	glutReshapeFunc(reshapeFcn);
+//	glutPassiveMotionFunc(onMouseMove);
+//	glutSpecialFunc(SpecialKeys);
+//	glutMainLoop();
+//	
+//	return 0;
+//}
+//
+//#include <stdlib.h>
+//#include<time.h>
+//#include <GL/glut.h>
+//
+//#define WIDTH 800
+//#define HEIGHT 600
+//#define AXIS_SIZE 60
+//#define TIMER 100
+//
+//void SetupRC();
+//void RenderScene(void);
+//void ChangeSize(int w, int h);
+//void TimerFunction(int value);
+//void MenuFunc(int button);
+//
+//float yRot = 0.0f;
+//
+//int menu_main;
+//int menu_depth_test;
+//int menu_cull_test;
+//
+//int main(int argc, char* argv[]) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(WIDTH, HEIGHT);
+//	glutCreateWindow("Hidden Surface");
+//
+//	glutDisplayFunc(RenderScene);
+//	glutReshapeFunc(ChangeSize);
+//
+//	glutTimerFunc(TIMER, TimerFunction, 1);
+//
+//	menu_depth_test = glutCreateMenu(MenuFunc);
+//	glutAddMenuEntry("은면제거 on", 1);
+//	glutAddMenuEntry("은면제거 off", 2);
+//	menu_cull_test = glutCreateMenu(MenuFunc);
+//	glutAddMenuEntry("컬링 on", 3);
+//	glutAddMenuEntry("컬링 off", 4);
+//	menu_main = glutCreateMenu(MenuFunc);
+//	glutAddSubMenu("은면제거", menu_depth_test);
+//	glutAddSubMenu("컬링", menu_cull_test);
+//	glutAttachMenu(GLUT_RIGHT_BUTTON);
+//
+//	SetupRC();
+//	glutMainLoop();
+//
+//	return 0;
+//}
+//
+//void RenderScene(void) {
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//	glPushMatrix();
+//	glLoadIdentity();
+//	glRotatef(yRot,0.0f,1.0f,0.0f);
+//
+//	glBegin(GL_QUADS); {
+//		glColor3f(1.0f, 0.0f, 0.0f);
+//		glVertex3f(50.0, 50.0, 50.0f);
+//		glVertex3f(-50.0, 50.0, 50.0f);
+//		glVertex3f(-50.0, -50.0, 50.0f);
+//		glVertex3f(50.0, -50.0, 50.0f);
+//
+//		glColor3f(0.0f, 1.0f, 0.0f);
+//		glVertex3f(-50.0, 50.0, 50.0f);
+//		glVertex3f(-50.0, 50.0, -50.0f);
+//		glVertex3f(-50.0, -50.0, -50.0f);
+//		glVertex3f(-50.0, -50.0, 50.0f);
+//
+//		glColor3f(0.0f, 0.0f, 1.0f);
+//		glVertex3f(-50.0, 50.0, -50.0f);
+//		glVertex3f(50.0, 50.0, -50.0f);
+//		glVertex3f(50.0, -50.0, -50.0f);
+//		glVertex3f(-50.0, -50.0, -50.0f);
+//
+//		glColor3f(0.0f, 0.0f, 1.0f);
+//		glVertex3f(-50.0, 50.0, -50.0f);
+//		glVertex3f(-50.0,-50.0, -50.0f);
+//		glVertex3f(50.0, -50.0, -50.0f);
+//		glVertex3f(50.0, 50.0, -50.0f);
+//	}
+//	glEnd();
+//	glPopMatrix();
+//
+//	glutSwapBuffers();
+//}
+//
+//void SetupRC() {
+//	glEnable(GL_DEPTH_TEST);
+//	glFrontFace(GL_CCW);
+//	glEnable(GL_CULL_FACE);
+//	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+//}
+//
+//void ChangeSize(int w, int h) {
+//	GLfloat nRange = 100.0f;
+//
+//	glViewport(0, 0, w, h);
+//
+//	GLfloat fAspect;
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	fAspect = (float)w / (float)h;
+//	gluPerspective(60.0, fAspect, 1.0, 500.0);
+//	glTranslatef(0.0f, 0.0f, -300.0f);
+//	glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
+//
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//
+//	glutSwapBuffers();
+//}
+//
+//void TimerFunction(int value) {
+//	yRot += 1.0f;
+//
+//	glutPostRedisplay();
+//	glutTimerFunc(TIMER, TimerFunction, 1);
+//}
+//
+//void MenuFunc(int button) {
+//	switch (button)
+//	{
+//	case 1:
+//		glEnable(GL_DEPTH_TEST);
+//		break;
+//	case 2:
+//		glDisable(GL_DEPTH_TEST);
+//		break;
+//	case 3:
+//		glEnable(GL_CULL_FACE);
+//		break;
+//	case 4:
+//		glDisable(GL_CULL_FACE);
+//		break;
+//	}
+//	glutPostRedisplay();
+//}
+
+#include <stdlib.h>
+#include <GL/glut.h>
+
+static int leftFirst = GL_TRUE;
+float alpha = 1.0;
+
+static void init(void) {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glShadeModel(GL_FLAT);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+}
+
+static void drawLeftTriangle(void) {
+	glBegin(GL_TRIANGLES);
+	glColor4f(0.0, 1.0, 0.0, 1);
+	glVertex3f(0.1, 0.9, 0.0);
+	glVertex3f(0.1, 0.1, 0.0);
+	glVertex3f(0.7, 0.5, 0.0);
+	glEnd();
+}
+
+static void drawRightTriangle(void) {
+	glBegin(GL_TRIANGLES);
+	glColor4f(1.0, 0.0, 0.0, alpha);
+	glVertex3f(0.9, 0.9, 0.0);
+	glVertex3f(0.3, 0.5, 0.0);
+	glVertex3f(0.9, 0.1, 0.0);
+	glEnd();
+}
+
+void display(void) {
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	if (leftFirst) {
+		drawLeftTriangle();
+		drawRightTriangle();
+	}
+	else {
+		drawRightTriangle();
+		drawLeftTriangle();
+	}
+	glFlush();
+}
+
+void reshape(int w, int h) {
+	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	if (w <= h)
+		gluOrtho2D(0.0, 1.0, 0.0, 1.0*(GLfloat)h / (GLfloat)w);
+	else
+		gluOrtho2D(0.0, 1.0*(GLfloat)w / (GLfloat)h, 0.0, 1.0);
+}
+
+void keyboard(unsigned char key, int x, int y) {
+	switch (key){
+	case 't':
+	case 'T':
+		leftFirst = !leftFirst;
+		glutPostRedisplay();
+		break;
+	case 'a':
+		if (alpha > 0) alpha -= 0.05;
+		glutPostRedisplay();
+		break;
+	case 27:
+		exit(0);
+		break;
+	default:
+		break;
+	}
+}
+
+int main(int argc, char* argv[]) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(500, 500);
+	glutCreateWindow(argv[0]);
+	init();
+	glutReshapeFunc(reshape);
+	glutKeyboardFunc(keyboard);
+	glutDisplayFunc(display);
+	glutMainLoop();
+	return 0;
+}
