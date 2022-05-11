@@ -1656,89 +1656,435 @@
 //	glutPostRedisplay();
 //}
 
-#include <stdlib.h>
-#include <GL/glut.h>
+//#include <stdlib.h>
+//#include <GL/glut.h>
+//
+//static int leftFirst = GL_TRUE;
+//float alpha = 1.0;
+//
+//static void init(void) {
+//	glEnable(GL_BLEND);
+//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//	glShadeModel(GL_FLAT);
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//}
+//
+//static void drawLeftTriangle(void) {
+//	glBegin(GL_TRIANGLES);
+//	glColor4f(0.0, 1.0, 0.0, 1);
+//	glVertex3f(0.1, 0.9, 0.0);
+//	glVertex3f(0.1, 0.1, 0.0);
+//	glVertex3f(0.7, 0.5, 0.0);
+//	glEnd();
+//}
+//
+//static void drawRightTriangle(void) {
+//	glBegin(GL_TRIANGLES);
+//	glColor4f(1.0, 0.0, 0.0, alpha);
+//	glVertex3f(0.9, 0.9, 0.0);
+//	glVertex3f(0.3, 0.5, 0.0);
+//	glVertex3f(0.9, 0.1, 0.0);
+//	glEnd();
+//}
+//
+//void display(void) {
+//	glClear(GL_COLOR_BUFFER_BIT);
+//
+//	if (leftFirst) {
+//		drawLeftTriangle();
+//		drawRightTriangle();
+//	}
+//	else {
+//		drawRightTriangle();
+//		drawLeftTriangle();
+//	}
+//	glFlush();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	if (w <= h)
+//		gluOrtho2D(0.0, 1.0, 0.0, 1.0*(GLfloat)h / (GLfloat)w);
+//	else
+//		gluOrtho2D(0.0, 1.0*(GLfloat)w / (GLfloat)h, 0.0, 1.0);
+//}
+//
+//void keyboard(unsigned char key, int x, int y) {
+//	switch (key){
+//	case 't':
+//	case 'T':
+//		leftFirst = !leftFirst;
+//		glutPostRedisplay();
+//		break;
+//	case 'a':
+//		if (alpha > 0) alpha -= 0.05;
+//		glutPostRedisplay();
+//		break;
+//	case 27:
+//		exit(0);
+//		break;
+//	default:
+//		break;
+//	}
+//}
+//
+//int main(int argc, char* argv[]) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutInitWindowSize(500, 500);
+//	glutCreateWindow(argv[0]);
+//	init();
+//	glutReshapeFunc(reshape);
+//	glutKeyboardFunc(keyboard);
+//	glutDisplayFunc(display);
+//	glutMainLoop();
+//	return 0;
+//}
 
-static int leftFirst = GL_TRUE;
-float alpha = 1.0;
+// 7-1
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <GL/glut.h>
+//
+//float y_position;
+//bool flag;
+//
+//void init() {
+//	y_position = 0.0;
+//	flag = false;
+//}
+//
+//void draw_axis() {
+//	glColor3f(1.0, 1.0,0.0);
+//
+//	glBegin(GL_LINES);
+//		glVertex2f(-1.0, 0.0);
+//		glVertex2f(11.0, 0.0);
+//	glEnd();
+//
+//	glBegin(GL_LINES);
+//		glVertex2f(0.0, -1.0);
+//		glVertex2f(0.0, 11.0);
+//	glEnd();
+//}
+//
+//void draw_basic_axis_line() {
+//	glColor3f(1.0, 0.0, 0.0);
+//
+//	glBegin(GL_LINES);
+//		glVertex2f(0.0, y_position);
+//		glVertex2f(10.0, y_position);
+//	glEnd();
+//}
+//
+//void draw_triangle() {
+//	glBegin(GL_POLYGON);
+//		glColor3f(1.0, 0.0, 0.0);
+//		glVertex2f(5.0, 6.0);
+//		glColor3f(0.0, 1.0, 0.0);
+//		glVertex2f(4.0, 4.0);
+//		glColor3f(0.0, 0.0, 1.0);
+//		glVertex2f(6.0, 4.0);
+//	glEnd();
+//}
+//void display() {
+//	glClear(GL_COLOR_BUFFER_BIT);
+//
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//
+//	draw_axis();
+//	draw_basic_axis_line();
+//
+//	if (flag) {
+//		glTranslatef(5.0, y_position, 0.0);
+//		glRotatef(180.0, 1.0, 0.0, 0.0);
+//		glTranslatef(-5.0, -y_position, 0.0);
+//	}
+//
+//	draw_triangle();
+//
+//	glFlush();
+//}
+//
+//void keyboard(unsigned char key, int x, int y) {
+//	switch (key)
+//	{
+//	case 'r':
+//		flag = true;
+//		glutPostRedisplay();
+//		break;
+//
+//	case 27:
+//		exit(0);
+//		break;
+//
+//	default:
+//		break;
+//	}
+//}
+//
+//void SpecialKeys(int key, int x, int y) {
+//	if (key == GLUT_KEY_UP) {
+//		y_position = y_position + 0.1;
+//		glutPostRedisplay();
+//		flag = false;
+//	}
+//	if (key == GLUT_KEY_DOWN) {
+//		y_position = y_position - 0.1;
+//		glutPostRedisplay();
+//		flag = false;
+//	}
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glOrtho(-1.0, 11.0, -1.0, 11.0, -1.0, 1.0);
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Axis-based Rotation");
+//
+//	init();
+//	glutDisplayFunc(display);
+//	glutKeyboardFunc(keyboard);
+//	glutReshapeFunc(reshape);
+//	glutSpecialFunc(SpecialKeys);
+//
+//	glutMainLoop();
+//
+//	return 0;
+//}
 
-static void init(void) {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glShadeModel(GL_FLAT);
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-}
+// 7-2
+//#include<stdio.h>
+//#include<GL/glut.h>
+//
+//void init()
+//{
+//	GLfloat light_position[] = { 1,2,3,1 };
+//	GLfloat light_ambient[] = { 0,1,0,1 };
+//	GLfloat light_diffuse[] = { 1,0,0,1 };
+//	GLfloat light_specular[] = { 1,1,1,1 };
+//
+//	glClearColor(0, 0, 0, 0);
+//	glShadeModel(GL_SMOOTH);
+//
+//	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+//	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+//	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+//	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+//
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//	glEnable(GL_DEPTH_TEST);
+//}
+//
+//void display(void)
+//{
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	glutSolidTeapot(0.5);
+//	glFlush();
+//}
+//
+//void reshape(int w, int h)
+//{
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//
+//	if (w <= h)
+//		glOrtho(-1.5, 1.5, -1.5*(GLfloat)h / (GLfloat)w, 1.5*(GLfloat)h / (GLfloat)h, -10.0, 10.0);
+//	else
+//		glOrtho(-1.5*(GLfloat)h / (GLfloat)w, 1.5*(GLfloat)h / (GLfloat)h, -1.5, 1.5, -10.0, 10.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//}
+//
+//int main(int argc, char** argv)
+//{
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Lighting Example");
+//
+//	init();
+//	glutDisplayFunc(display);
+//
+//	glutReshapeFunc(reshape);
+//
+//	glutMainLoop();
+//
+//	return 0;
+//}
 
-static void drawLeftTriangle(void) {
-	glBegin(GL_TRIANGLES);
-	glColor4f(0.0, 1.0, 0.0, 1);
-	glVertex3f(0.1, 0.9, 0.0);
-	glVertex3f(0.1, 0.1, 0.0);
-	glVertex3f(0.7, 0.5, 0.0);
-	glEnd();
-}
+//7-3
+//#include<stdio.h>
+//#include <GL/glut.h>
+//
+//GLfloat position[] = { 0.0,4.5,0.0,1.0 };
+//
+//void init(void) {
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	GLfloat light_ambient[] = { 0.1,0.1,0.1,1.0 };
+//	GLfloat light_diffuse[] = { 1.0,1.0,1.0,1.0 };
+//	GLfloat light_specular[] = { 1.0,1.0,1.0,1.0 };
+//
+//	glShadeModel(GL_SMOOTH);
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//	glEnable(GL_DEPTH_TEST);
+//
+//	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+//	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+//	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+//
+//	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.001);
+//	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.004);
+//}
+//
+//void display(void) {
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//	glPushMatrix();
+//	glLightfv(GL_LIGHT0, GL_POSITION, position);
+//
+//	glTranslated(position[0], position[1], position[2]);
+//	glDisable(GL_LIGHTING);
+//	glColor3f(0.0, 1.0, 1.0);
+//	glutWireCube(0.5);
+//
+//	glEnable(GL_LIGHTING);
+//	glPopMatrix();
+//
+//	glutSolidSphere(1, 50, 50);
+//	glFlush();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glOrtho(-5.0, 5.0, -5.0*(GLfloat)h / (GLfloat)w, 5.0*(GLfloat)w / (GLfloat)h, -5.0, 5.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//}
+//
+//void mouse(int button, int state, int x, int y) {
+//	switch (button)
+//	{
+//	case GLUT_LEFT_BUTTON:
+//		if (state == GLUT_DOWN) {
+//			position[1] -= 0.1;
+//			printf("Light Position: (%.2lf, %.2lf, %.2lf)\n", position[0], position[1], position[2]);
+//		}
+//		break;
+//	case GLUT_RIGHT_BUTTON:
+//		if (state == GLUT_DOWN) {
+//			position[1] += 0.1;
+//			printf("Light Position: (%.2lf, %.2lf, %.2lf)\n", position[0], position[1], position[2]);
+//		}
+//		break;
+//	}
+//	glutPostRedisplay();
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Lighting Example");
+//	init();
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(reshape);
+//	glutMouseFunc(mouse);
+//	glutMainLoop();
+//	return 0;
+//}
+//
 
-static void drawRightTriangle(void) {
-	glBegin(GL_TRIANGLES);
-	glColor4f(1.0, 0.0, 0.0, alpha);
-	glVertex3f(0.9, 0.9, 0.0);
-	glVertex3f(0.3, 0.5, 0.0);
-	glVertex3f(0.9, 0.1, 0.0);
-	glEnd();
-}
-
-void display(void) {
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	if (leftFirst) {
-		drawLeftTriangle();
-		drawRightTriangle();
-	}
-	else {
-		drawRightTriangle();
-		drawLeftTriangle();
-	}
-	glFlush();
-}
-
-void reshape(int w, int h) {
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	if (w <= h)
-		gluOrtho2D(0.0, 1.0, 0.0, 1.0*(GLfloat)h / (GLfloat)w);
-	else
-		gluOrtho2D(0.0, 1.0*(GLfloat)w / (GLfloat)h, 0.0, 1.0);
-}
-
-void keyboard(unsigned char key, int x, int y) {
-	switch (key){
-	case 't':
-	case 'T':
-		leftFirst = !leftFirst;
-		glutPostRedisplay();
-		break;
-	case 'a':
-		if (alpha > 0) alpha -= 0.05;
-		glutPostRedisplay();
-		break;
-	case 27:
-		exit(0);
-		break;
-	default:
-		break;
-	}
-}
-
-int main(int argc, char* argv[]) {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
-	glutCreateWindow(argv[0]);
-	init();
-	glutReshapeFunc(reshape);
-	glutKeyboardFunc(keyboard);
-	glutDisplayFunc(display);
-	glutMainLoop();
-	return 0;
-}
+//7-4
+//#include<stdio.h>
+//#include <GL/glut.h>
+//
+//static int spin = 0;
+//
+//void init(void) {
+//	
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	glShadeModel(GL_SMOOTH);
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//	glEnable(GL_DEPTH_TEST);
+//}
+//
+//void display(void) {
+//	GLfloat position[] = { 0.0,0.0,1.5,1.0 };
+//
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//	glPushMatrix();
+//	glTranslatef(0.0,0.0,-5.0);
+//
+//	glPushMatrix();
+//	glRotated((GLdouble)spin, 1.0, 0.0, 0.0);
+//	glLightfv(GL_LIGHT0, GL_POSITION, position);
+//
+//	glTranslated(0.0, 0.0, 1.5);
+//	glDisable(GL_LIGHTING);
+//	glColor3f(0.0, 1.0, 1.0);
+//	glutWireCube(0.1);
+//
+//	glEnable(GL_LIGHTING);
+//	glPopMatrix();
+//
+//	glutSolidTorus(0.275,0.85,8,15);
+//	glPopMatrix();
+//	glFlush();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluPerspective(40.0, (GLfloat)w/(GLfloat)h,1.0,20.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//}
+//
+//void mouse(int button, int state, int x, int y) {
+//	switch (button)
+//	{
+//	case GLUT_LEFT_BUTTON:
+//		if (state == GLUT_DOWN) {
+//			spin = (spin + 30) % 360;
+//			glutPostRedisplay();
+//		}
+//		break;
+//	}
+//	glutPostRedisplay();
+//}
+//
+//int main(int argc, char** argv){
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Lighting Example");
+//	init();
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(reshape);
+//	glutMouseFunc(mouse);
+//	glutMainLoop();
+//	return 0;
+//}
