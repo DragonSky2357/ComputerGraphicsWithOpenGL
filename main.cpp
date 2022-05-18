@@ -2088,3 +2088,493 @@
 //	glutMainLoop();
 //	return 0;
 //}
+
+//#include<stdio.h>
+//#include <GL/glut.h>
+//
+//static int spin = 0;
+//
+//void init(void) {
+//	
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	glShadeModel(GL_SMOOTH);
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//	glEnable(GL_DEPTH_TEST);
+//}
+//
+//void display(void) {
+//	GLfloat position[] = { 0.0,0.0,1.5,1.0 };
+//
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//	glPushMatrix();
+//	glTranslatef(0.0,0.0,-5.0);
+//
+//	glPushMatrix();
+//	glRotated((GLdouble)spin, 1.0, 0.0, 0.0);
+//	glLightfv(GL_LIGHT0, GL_POSITION, position);
+//
+//	glTranslated(0.0, 0.0, 1.5);
+//	glDisable(GL_LIGHTING);
+//	glColor3f(0.0, 1.0, 1.0);
+//	glutWireCube(0.1);
+//
+//	glEnable(GL_LIGHTING);
+//	glPopMatrix();
+//
+//	glutSolidTorus(0.275,0.85,8,15);
+//	glPopMatrix();
+//	glFlush();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	gluPerspective(40.0, (GLfloat)w/(GLfloat)h,1.0,20.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//}
+//
+//void mouse(int button, int state, int x, int y) {
+//	switch (button)
+//	{
+//	case GLUT_LEFT_BUTTON:
+//		if (state == GLUT_DOWN) {
+//			spin = (spin + 30) % 360;
+//			glutPostRedisplay();
+//		}
+//		break;
+//	}
+//	glutPostRedisplay();
+//}
+//
+//int main(int argc, char** argv){
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Lighting Example");
+//	init();
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(reshape);
+//	glutMouseFunc(mouse);
+//	glutMainLoop();
+//	return 0;
+//}
+
+// 7-5  Material Property 미완성
+//#include<GL/glut.h>
+//#include <stdlib.h>
+//
+//void myinit(void) {
+//	GLfloat ambient[] = { 0.0,0.0,0.0,1.0 };
+//	GLfloat diffuse[] = { 1.0,1.0,1.0,1.0 };
+//	GLfloat position[] = { 0.0,3.0,2.0,0.0 };
+//	GLfloat lmodel_ambient[] = { 0.4,0.4,0.4,1.0 };
+//	GLfloat local_view[] = { 0.0 };
+//
+//	glEnable(GL_DEPTH_TEST);
+//	glDepthFunc(GL_LESS);
+//
+//	// LIGHT0 조명 관련 정보
+//	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+//	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+//	glLightfv(GL_LIGHT0, GL_POSITION, position);
+//
+//	// 전역 주변광 설정
+//	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+//	glLightModelfv(GL_LIGHT_MODEL_LOCAL_VIEWER, local_view);
+//
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//
+//	glClearColor(0.0, 0.1, 0.1, 0.0);
+//}
+//
+//void display(void) {
+//	GLfloat no_mat[] = { 0.0,0.0,0.0,1.0 };
+//	GLfloat mat_ambient[] = { 0.7,0.7,0.7,1.0 };
+//	GLfloat mat_ambient_color[] = { 0.8,0.8,0.2,1.0 };
+//	GLfloat mat_diffuse[] = { 0.1,0.5,0.8,1.0 };
+//	GLfloat mat_specular[] = { 1.0,1.0,1.0,1.0 };
+//	GLfloat no_shininess[] = { 0.0 };
+//	GLfloat low_shininess[] = { 5.0 };
+//	GLfloat high_shininess[] = { 100.0 };
+//	GLfloat mat_emission[] = { 0.3,0.2,0.2,0.0 };
+//
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//	glPushMatrix();
+//	glTranslatef(-3.75, 3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(-1.25, 3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(1.25, 3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(3.75, 3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(-3.75, 0.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(-1.25, 0.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(1.25, 0.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(3.75, 0.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(-3.75, -3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(-1.25, -3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(1.25, -3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glPushMatrix();
+//	glTranslatef(3.75, -3.0, 0.0);
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
+//	glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+//	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
+//	glutSolidSphere(1.0, 16, 16);
+//	glPopMatrix();
+//
+//	glFlush();
+//}
+//
+//void myReshape(int w, int h) {
+//	glViewport(0, 0, w, h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//
+//	if (w <= (h * 2))
+//		glOrtho(-6.0, 6.0, -3.0*((GLfloat)h * 2) / (GLfloat)w,
+//			3.0*((GLfloat)h * 2) / (GLfloat)w, -10.0, 10.0);
+//	else
+//		glOrtho(-6.0*(GLfloat)w / ((GLfloat)h * 2),
+//			6.0*(GLfloat)w / ((GLfloat)h * 2), -3.0, 3.0, -10.0, 10.0);
+//	glMatrixMode(GL_MODELVIEW);
+//}
+//
+//void key(unsigned char k, int x, int y) {
+//	switch (k)
+//	{
+//	case 27:
+//		exit(0);
+//		break;
+//	default:
+//		return;
+//	}
+//	glutPostRedisplay();
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(600, 450);
+//	glutCreateWindow("Material Property");
+//
+//	myinit();
+//	glutReshapeFunc(myReshape);
+//	glutDisplayFunc(display);
+//	glutKeyboardFunc(key);
+//	glutMainLoop();
+//	return 0;
+//}
+
+// 7-6 Material Color
+//#include <GL/glut.h>
+//#include <stdlib.h>
+//
+//GLfloat diffuseMaterial[4] = { 0.5,0.5,0.5,1.0 };
+//
+//void init(void) {
+//	GLfloat mat_specular[] = { 1.0,1.0,1.0,1.0 };
+//	GLfloat light_position[] = { 1.0,1.0,1.0,0.0 };
+//
+//	glClearColor(0.0, 0.0, 0.0, 0.0);
+//	glShadeModel(GL_SMOOTH);
+//	glEnable(GL_DEPTH_TEST);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuseMaterial);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+//	glMaterialf(GL_FRONT, GL_SHININESS, 25.0);
+//	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//
+//	glColorMaterial(GL_FRONT, GL_DIFFUSE);
+//	glEnable(GL_COLOR_MATERIAL);
+//}
+//
+//void display(void) {
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	glutSolidSphere(1.0, 20, 16);
+//	glFlush();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	if (w <= h)
+//		glOrtho(-1.5, 1.5, -1.5*(GLfloat)h / (GLfloat)w, 1.5*(GLfloat)h / (GLfloat)w, -10.0, 10.0);
+//	else
+//		glOrtho(-1.5*(GLfloat)w / (GLfloat)h, 1.5*(GLfloat)w / (GLfloat)h, -1.5, 1.5, -10.0, 10.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//}
+//
+//void mouse(int button, int state, int x, int y) {
+//	switch (button)
+//	{
+//	case GLUT_LEFT_BUTTON:
+//		if (state == GLUT_DOWN) {
+//			diffuseMaterial[0] += 0.1;
+//			if (diffuseMaterial[0] > 1.0)
+//				diffuseMaterial[0] = 0.0;
+//			glColor4fv(diffuseMaterial);
+//			glutPostRedisplay();
+//		}
+//		break;
+//
+//	case GLUT_MIDDLE_BUTTON:
+//		if (state == GLUT_DOWN) {
+//			diffuseMaterial[1] += 0.1;
+//			if (diffuseMaterial[1] > 1.0)
+//				diffuseMaterial[1] = 0.0;
+//			glColor4fv(diffuseMaterial);
+//			glutPostRedisplay();
+//		}
+//		break;
+//
+//	case GLUT_RIGHT_BUTTON:
+//		if (state == GLUT_DOWN) {
+//			diffuseMaterial[2] += 0.1;
+//			if (diffuseMaterial[2] > 1.0)
+//				diffuseMaterial[2] = 0.0;
+//			glColor4fv(diffuseMaterial);
+//			glutPostRedisplay();
+//		}
+//		break;
+//	default:
+//		break;
+//	}
+//}
+//
+//void keyboard(unsigned char key, int x, int y) {
+//	switch (key)
+//	{
+//	case 27:
+//		exit(0);
+//		break;
+//	}
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(500, 500);
+//	glutInitWindowPosition(100, 100);
+//	glutCreateWindow("Material Color");
+//	init();
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(reshape);
+//	glutMouseFunc(mouse);
+//	glutKeyboardFunc(keyboard);
+//	glutMainLoop();
+//	return 0;
+//}
+
+// 7-7 다양한 종류의 teapot
+//#include <GL/glut.h>
+//#include <stdlib.h>
+//
+//void material_selection(float ambr, float ambg, float ambb,
+//	float difr, float difg, float difb,
+//	float specr, float specg, float specb, float shine){
+//	float material_amb[4] = { ambr,ambg,ambb,1.0 };
+//	float material_dif[4] = { difr,difg,difb,1.0 };
+//	float material_spec[4] = { specr,specg,specb,1.0 };
+//
+//	glMaterialfv(GL_FRONT, GL_AMBIENT, material_amb);
+//	glMaterialfv(GL_FRONT, GL_DIFFUSE, material_dif);
+//	glMaterialfv(GL_FRONT, GL_SPECULAR, material_spec);
+//	glMaterialf(GL_FRONT, GL_SHININESS, shine* 128.0);
+//}
+//
+//GLfloat diffuseMaterial[4] = { 0.5,0.5,0.5,1.0 };
+//
+//void init(void) {
+//	GLfloat ambient[] = { 0.2,0.2,0.2,1.0 };
+//	GLfloat diffuse[] = { 1.0,1.0,1.0,1.0 };
+//	GLfloat specular[] = { 1.0,1.0,1.0,1.0 };
+//	GLfloat position[] = { 0.0,3.0,3.0,0.0 };
+//
+//	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+//	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+//	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+//	glLightfv(GL_LIGHT0, GL_POSITION, position);
+//
+//	glFrontFace(GL_CW);
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//	glEnable(GL_DEPTH_TEST);
+//
+//	material_selection(0.0215, 0.1745, 0.0215, 0.07568, 0.61424, 0.07568, 0.33, 0.727811, 0.633, 0.6);
+//}
+//
+//void display(void) {
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	glutSolidTeapot(1.0);
+//	glFlush();
+//}
+//
+//void reshape(int w, int h) {
+//	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//
+//	if (w <= h)
+//		glOrtho(-2.0, 2.0, -2.0*(GLfloat)h / (GLfloat)w, 2.0*(GLfloat)h / (GLfloat)w, -10.0, 10.0);
+//	else
+//		glOrtho(-2.0*(GLfloat)w / (GLfloat)h, 2.0*(GLfloat)w / (GLfloat)h, -2.0, 2.0, -10.0, 10.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//}
+//
+//void menu_select(int value) {
+//	switch (value)
+//	{
+//	case 1:
+//		material_selection(0.24725, 0.1995, 0.0745, 0.75164, 0.60648, 0.22648, 0.628281, 0.555802, 0.366065, 0.4);
+//		glutPostRedisplay();
+//		break;
+//	case 2:
+//		material_selection(0.1745,0.01175,0.01175,0.61424,0.04136,0.04136,0.727811,0.626959,0.626959,0.6);
+//		glutPostRedisplay();
+//		break;
+//	case 3:
+//		material_selection(0.2125,0.1275,0.054,0.714,0.4284,0.18144,0.393548,0.271906,0.166721,0.2);
+//		glutPostRedisplay();
+//		break;
+//	case 4:
+//		material_selection(0.0215,0.1745,0.0215,0.07568,0.61424,0.07568,0.633,0.727811,0.633,0.6);
+//		glutPostRedisplay();
+//		break;
+//	case 666:
+//		exit(0);
+//		break;
+//	}
+//}
+//
+//int main(int argc, char** argv) {
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(500, 600);
+//	glutInitWindowPosition(50, 50);
+//	glutCreateWindow("Teapot Selection Example");
+//	init();
+//	glutDisplayFunc(display);
+//	glutReshapeFunc(reshape);
+//	glutCreateMenu(menu_select);
+//	glutAddMenuEntry("Gold", 1);
+//	glutAddMenuEntry("Rubby", 2);
+//	glutAddMenuEntry("Bronze", 3);
+//	glutAddMenuEntry("Emerald", 4);
+//
+//	glutAttachMenu(GLUT_RIGHT_BUTTON);
+//	glutMainLoop();
+//	return 0;
+//}
